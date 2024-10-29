@@ -1,6 +1,10 @@
+import { useContext } from "react"
 import { NavBarItem } from "../NavbarItem"
+import { ShoppingCartContext } from "../../Context"
 
 const Navbar = () => {
+    const context = useContext(ShoppingCartContext)
+
     const menu1 = [
         { to: '/', text: 'Shop!', className: 'font-semibold text-lg' },
         { to: '/clothes', text: 'Clothes', className: '' },
@@ -38,6 +42,9 @@ const Navbar = () => {
                         </NavBarItem>
                     ))
                 }
+                <li>
+                    Carro {context.count}
+                </li>
             </ul>
         </nav>
     )
