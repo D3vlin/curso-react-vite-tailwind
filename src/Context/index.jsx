@@ -6,6 +6,9 @@ const ShoppingCartContext = createContext()
 const ShoppingCartProvider = ({ children }) => {
     const [items, setItems] = useState(null)
     const [count, setCount] = useState(0)
+    const [isOpenDetail, setIsOpenDetail] = useState(false)
+
+    const toggleProductDetail = () => setIsOpenDetail(!isOpenDetail)
 
     useEffect(() => {
         fetch(`${ApiFakeStore}/products`)
@@ -16,7 +19,7 @@ const ShoppingCartProvider = ({ children }) => {
 
     return (
         <ShoppingCartContext.Provider value={
-            { items, setItems, count, setCount }
+            { items, setItems, count, setCount, toggleProductDetail, isOpenDetail }
         }>
             {children}
         </ShoppingCartContext.Provider>
