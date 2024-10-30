@@ -4,11 +4,17 @@ import { ApiFakeStore } from "../api"
 const ShoppingCartContext = createContext()
 
 const ShoppingCartProvider = ({ children }) => {
-    const [items, setItems] = useState(null)
+    //Shopping cart
     const [count, setCount] = useState(0)
-    const [isOpenDetail, setIsOpenDetail] = useState(false)
 
-    const toggleProductDetail = () => setIsOpenDetail(!isOpenDetail)
+    //Products
+    const [items, setItems] = useState(null)
+
+    //Product detail
+    const [isOpenDetail, setIsOpenDetail] = useState(false)
+    const toggleProductDetail = (isOpen = !isOpenDetail) => setIsOpenDetail(isOpen);
+    const [productToShow, setProductToShow] = useState({})
+
 
     useEffect(() => {
         fetch(`${ApiFakeStore}/products`)
@@ -19,7 +25,7 @@ const ShoppingCartProvider = ({ children }) => {
 
     return (
         <ShoppingCartContext.Provider value={
-            { items, setItems, count, setCount, toggleProductDetail, isOpenDetail }
+            { items, setItems, count, setCount, toggleProductDetail, isOpenDetail, productToShow, setProductToShow }
         }>
             {children}
         </ShoppingCartContext.Provider>
