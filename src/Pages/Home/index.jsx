@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context";
 import { Layout } from "../../Components/Layout";
 import { Card } from "../../Components/Card";
+import { ProducDetail } from "../../Components/ProductDetail";
 
 function Home() {
     const context = useContext(ShoppingCartContext)
@@ -16,6 +17,7 @@ function Home() {
             })
           }
           </div>
+          <ProducDetail />
         </Layout>
     )
 }
