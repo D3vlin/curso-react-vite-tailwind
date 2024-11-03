@@ -21,6 +21,7 @@ const Card = (data) => {
         event.stopPropagation();
         context.setCount(context.count+1);
         context.setCartProducts([...context.cartProducts, productDetail])
+        context.toggleCheckoutMenu(true)
     }
 
     return (
