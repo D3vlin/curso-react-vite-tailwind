@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { PlusIcon } from "@heroicons/react/16/solid"
+import { CheckIcon, PlusIcon } from "@heroicons/react/16/solid"
 import { ShoppingCartContext } from "../../Context"
 
 const Card = (data) => {
@@ -14,14 +14,38 @@ const Card = (data) => {
             context.setProductToShow(productDetail)
             context.toggleProductDetail(true)
         }
-        
+
     }
 
     const addProductToCart = (event, productDetail) => {
         event.stopPropagation();
-        context.setCount(context.count+1);
+        context.setCount(context.count + 1);
         context.setCartProducts([...context.cartProducts, productDetail])
         context.toggleCheckoutMenu(true)
+    }
+
+    const renderIcon = (id) => {
+        const isInCart = context.cartProducts.filter(product => product.id === id).length > 0
+
+        if (isInCart) {
+            return (
+                <button
+                    className="absolute top-0 right-0 flex justify-center items-center bg-black w-6 h-6 rounded-full m-2 p-1"
+                    onClick={(event) => event.stopPropagation()}>
+                    <CheckIcon className="h-6 w-6 text-white" />
+                </button>
+            )
+
+        } else {
+            return (
+                <button
+                    className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1"
+                    onClick={(event) => addProductToCart(event, data.data)}>
+                    <PlusIcon className="h-6 w-6 text-black" />
+                </button>
+            )
+        }
+
     }
 
     return (
@@ -31,11 +55,7 @@ const Card = (data) => {
             <figure className="relative mb-2 w-full h-4/5" onClick={() => context.toggleProductDetail}>
                 <img className="w-full h-full object-cover rounded-lg" src={data.data.images[0]} alt={data.data.title} />
                 <figcaption className="absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5">{data.data.category.name}</figcaption>
-                <button
-                    className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1"
-                    onClick={(event) => addProductToCart(event, data.data) }>
-                    <PlusIcon className="h-6 w-6 text-black" />
-                </button>
+                {renderIcon(data.data.id)}
             </figure>
             <p className="flex justify-between">
                 <span className="text-sm font-light">{data.data.title}</span>

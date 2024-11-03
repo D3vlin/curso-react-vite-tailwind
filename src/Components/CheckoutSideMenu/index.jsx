@@ -12,7 +12,7 @@ const CheckoutSideMenu = () => {
 
     return (
         <SideMenu openMenu={context.isOpenCheckoutMenu} onCloseMenu={closeCheckout} title={"My Order"}>
-            <div className="px-6">
+            <div className="px-6 overflow-y-scroll">
             {
                 context.cartProducts.map((product) => (
                     <OrderCard key={product.id} title={product.title} imageUrl={product.images} price={product.price} />
