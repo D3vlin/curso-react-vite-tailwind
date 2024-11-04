@@ -4,9 +4,12 @@ import { ApiFakeStore } from "../api"
 const ShoppingCartContext = createContext()
 
 const ShoppingCartProvider = ({ children }) => {
-    //Shopping cart
+    //Shopping cart - products
     const [count, setCount] = useState(0)
     const [cartProducts, setCartProducts] = useState([])
+
+    //Shopping cart - order
+    const [order, setOrder] = useState([])
 
     //Products
     const [items, setItems] = useState(null)
@@ -36,7 +39,22 @@ const ShoppingCartProvider = ({ children }) => {
 
     return (
         <ShoppingCartContext.Provider value={
-            { items, setItems, count, setCount, toggleProductDetail, isOpenDetail, productToShow, setProductToShow, cartProducts, setCartProducts, toggleCheckoutMenu, isOpenCheckoutMenu }
+            {
+                items,
+                setItems,
+                count,
+                setCount, 
+                toggleProductDetail,
+                isOpenDetail,
+                productToShow,
+                setProductToShow,
+                cartProducts,
+                setCartProducts,
+                toggleCheckoutMenu,
+                isOpenCheckoutMenu,
+                order,
+                setOrder
+            }
         }>
             {children}
         </ShoppingCartContext.Provider>
