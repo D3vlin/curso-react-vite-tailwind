@@ -18,10 +18,10 @@ const Navbar = () => {
 
     const menu2 = [
         { to: '', text: 'Email!', className: 'text-black/60' },
-        { to: '/myorders', text: 'My Orders', className: '' },
-        { to: '/myaccount', text: 'My Account!', className: '' },
-        { to: '/signin', text: 'Sign In', className: '' },
-        { to: '/shoppCar', text: 'Shop Car', className: '' },
+        { to: '/my-orders', text: 'My Orders', className: '' },
+        { to: '/my-account', text: 'My Account!', className: '' },
+        { to: '/sign-in', text: 'Sign In', className: '' },
+        { to: '/shopp-car', text: 'Shop Car', className: '' },
     ]
 
     return (

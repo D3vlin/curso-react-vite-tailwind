@@ -13,10 +13,11 @@ const AppRoutes = () => {
   let routes = useRoutes([
     { path: '/', element: <Home /> },
     { path: '/myaccount', element: <MyAccount /> },
-    { path: '/myorder', element: <MyOrder /> },
-    { path: '/myorders', element: <MyOrders /> },
-    { path: '/myorders/last', element: <MyOrder /> },
-    { path: '/signin', element: <Signin /> },
+    { path: '/my-order', element: <MyOrder /> },
+    { path: '/my-orders', element: <MyOrders /> },
+    { path: '/my-orders/:last', element: <MyOrder /> },
+    { path: '/my-orders/:id', element: <MyOrder /> },
+    { path: '/sign-in', element: <Signin /> },
     { path: '/*', element: <NotFound /> }
   ])
 
