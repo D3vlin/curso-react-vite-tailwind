@@ -13,6 +13,23 @@ const ShoppingCartProvider = ({ children }) => {
 
     //Products
     const [items, setItems] = useState(null)
+    const [filteredItems, setFilteredItems] = useState(null)
+    const [searchByTitle, setSearchByTitle] = useState(null)
+
+    useEffect(() => {
+        fetch(`${ApiFakeStore}/products`)
+            .then(response => response.json())
+            .then(response => setItems(response))
+            .catch(error => console.error(error))
+    }, [])
+
+    const filteredItemsByTitle = (items, searchByTitle) => {
+        return items?.filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
+    }
+
+    useEffect(() => {
+        if(searchByTitle) setFilteredItems(filteredItemsByTitle(items, searchByTitle))
+    }, [items, searchByTitle])
 
     //Product detail
     const [isOpenDetail, setIsOpenDetail] = useState(false)
@@ -30,13 +47,6 @@ const ShoppingCartProvider = ({ children }) => {
         isOpen ? setProductToShow({}) : null
     };
 
-    useEffect(() => {
-        fetch(`${ApiFakeStore}/products`)
-            .then(response => response.json())
-            .then(response => setItems(response))
-            .catch(error => console.error(error))
-    }, [])
-
     return (
         <ShoppingCartContext.Provider value={
             {
@@ -53,7 +63,10 @@ const ShoppingCartProvider = ({ children }) => {
                 toggleCheckoutMenu,
                 isOpenCheckoutMenu,
                 order,
-                setOrder
+                setOrder,
+                searchByTitle,
+                setSearchByTitle,
+                filteredItems
             }
         }>
             {children}
