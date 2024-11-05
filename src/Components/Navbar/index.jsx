@@ -7,12 +7,12 @@ const Navbar = () => {
     const context = useContext(ShoppingCartContext)
 
     const menu1 = [
-        { to: '/', text: 'Shop!', className: 'font-semibold text-lg' },
-        { to: '/clothes', text: 'Clothes', className: '' },
-        { to: '/electronics', text: 'Electronics!', className: '' },
-        { to: '/furnitures', text: 'Furnitures', className: '' },
-        { to: '/toys', text: 'Toys', className: '' },
-        { to: '/others', text: 'Others', className: '' },
+        { to: '/', text: 'Shop!', category: null, className: 'font-semibold text-lg' },
+        { to: '/clothes', text: 'Clothes', category: 'clothes', className: '' },
+        { to: '/electronics', text: 'Electronics!', category: 'electronics', className: '' },
+        { to: '/furnitures', text: 'Furnitures', category: 'furnitures', className: '' },
+        { to: '/toys', text: 'Toys', category: 'toys', className: '' },
+        { to: '/others', text: 'Others', category: 'others', className: '' },
     ]
 
 
@@ -29,7 +29,7 @@ const Navbar = () => {
             <ul className="flex items-center gap-3">
                 {
                     menu1.map(link => (
-                        <NavBarItem key={link.to} to={link.to} className={link.className} >
+                        <NavBarItem key={link.to} to={link.to} onClick={() => context.setSearchByCategory(link.category)} className={link.className} >
                             {link.text}
                         </NavBarItem>
                     ))
@@ -44,7 +44,7 @@ const Navbar = () => {
                     ))
                 }
                 <li className="flex items-center">
-                    <ShoppingBagIcon className="h-6 w-6 text-black" /> {context.count}
+                    <ShoppingBagIcon className="h-6 w-6 text-black" /> {context.cartProducts.length}
                 </li>
             </ul>
         </nav>
