@@ -12,6 +12,7 @@ import './App.css'
 const AppRoutes = () => {
   let routes = useRoutes([
     { path: '/', element: <Home /> },
+    { path: '/curso-react-vite-tailwind', element: <Home /> },
     { path: '/clothes', element: <Home /> },
     { path: '/electronics', element: <Home /> },
     { path: '/furnitures', element: <Home /> },
