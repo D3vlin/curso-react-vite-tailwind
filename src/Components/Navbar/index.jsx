@@ -7,21 +7,20 @@ const Navbar = () => {
     const context = useContext(ShoppingCartContext)
 
     const menu1 = [
-        { to: '/', text: 'Shop!', category: null, className: 'font-semibold text-lg' },
-        { to: '/clothes', text: 'Clothes', category: 'clothes', className: '' },
-        { to: '/electronics', text: 'Electronics!', category: 'electronics', className: '' },
-        { to: '/furnitures', text: 'Furnitures', category: 'furnitures', className: '' },
-        { to: '/toys', text: 'Toys', category: 'toys', className: '' },
-        { to: '/others', text: 'Others', category: 'others', className: '' },
+        { to: '/', text: 'Shop!', category: null, className: 'font-semibold text-lg', isRestricted: false },
+        { to: '/clothes', text: 'Clothes', category: 'clothes', className: '', isRestricted: false },
+        { to: '/electronics', text: 'Electronics!', category: 'electronics', className: '', isRestricted: false },
+        { to: '/furnitures', text: 'Furnitures', category: 'furnitures', className: '', isRestricted: false },
+        { to: '/toys', text: 'Toys', category: 'toys', className: '', isRestricted: false },
+        { to: '/others', text: 'Others', category: 'others', className: '', isRestricted: false },
     ]
 
 
     const menu2 = [
-        { to: '', text: 'Email!', className: 'text-black/60' },
-        { to: '/my-orders', text: 'My Orders', className: '' },
-        { to: '/my-account', text: 'My Account!', className: '' },
-        { to: '/sign-in', text: 'Sign In', className: '' },
-        { to: '/shopp-car', text: 'Shop Car', className: '' },
+        { to: '#', text: 'email@email.com', className: 'text-black/60', isRestricted: true },
+        { to: '/my-orders', text: 'My Orders', className: '', isRestricted: true },
+        { to: '/my-account', text: 'My Account!', className: '', isRestricted: true },
+        { to: '/sign-in', text: 'Sign Out', className: '', isRestricted: false },
     ]
 
     return (
@@ -29,7 +28,7 @@ const Navbar = () => {
             <ul className="flex items-center gap-3">
                 {
                     menu1.map(link => (
-                        <NavBarItem key={link.to} to={link.to} onClick={() => context.setSearchByCategory(link.category)} className={link.className} >
+                        <NavBarItem key={link.to} to={link.to} onClick={() => context.setSearchByCategory(link.category)} className={link.className} isRestricted={link.isRestricted} >
                             {link.text}
                         </NavBarItem>
                     ))
@@ -38,7 +37,7 @@ const Navbar = () => {
             <ul className="flex items-center gap-3">
                 {
                     menu2.map(link => (
-                        <NavBarItem key={link.to} to={link.to} className={link.className} >
+                        <NavBarItem key={link.to} to={link.to} className={link.className} isRestricted={link.isRestricted} >
                             {link.text}
                         </NavBarItem>
                     ))

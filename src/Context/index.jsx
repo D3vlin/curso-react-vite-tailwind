@@ -3,6 +3,30 @@ import { ApiFakeStore } from "../api"
 
 const ShoppingCartContext = createContext()
 
+//SignOut and Account
+const initializeLocalStorage = () => {
+    const accountInLocalStorage = localStorage.getItem('account')
+    const signOutInLocalStorage = localStorage.getItem('sign-out')
+    let parsedAccount
+    let parsedSignOut
+
+    if(!accountInLocalStorage) {
+        localStorage.setItem('account', JSON.stringify({}))
+        parsedAccount = {}
+    
+    } else {
+        parsedAccount = JSON.parse(accountInLocalStorage)
+    }
+
+    if(!signOutInLocalStorage) {
+        localStorage.setItem('sign-out', JSON.stringify(false))
+        parsedSignOut = false
+    
+    } else {
+        parsedSignOut = JSON.parse(signOutInLocalStorage)
+    }
+}
+
 const ShoppingCartProvider = ({ children }) => {
     //Shopping cart - products
     const [count, setCount] = useState(0)
@@ -75,6 +99,10 @@ const ShoppingCartProvider = ({ children }) => {
         isOpen ? setProductToShow({}) : null
     };
 
+    //SignOut and Account
+    const [accout, setAccout] = useState({})
+    const [signOut, setSignOut] = useState(false)
+
     return (
         <ShoppingCartContext.Provider value={
             {
@@ -96,7 +124,11 @@ const ShoppingCartProvider = ({ children }) => {
                 setSearchByTitle,
                 searchByCategory,
                 setSearchByCategory,
-                filteredItems
+                filteredItems,
+                accout,
+                setAccout,
+                signOut,
+                setSignOut
             }
         }>
             {children}
@@ -104,4 +136,4 @@ const ShoppingCartProvider = ({ children }) => {
     )
 }
 
-export { ShoppingCartContext, ShoppingCartProvider }
+export { ShoppingCartContext, ShoppingCartProvider, initializeLocalStorage }
