@@ -29,6 +29,7 @@ function Signin() {
           <Link to='/'>
             <button
               className="bg-black disabled:bg-black/40 text-white w-full rounded-lg py-3 mt-4 mb-2"
+              onClick={() => handleSignIn()}
               disabled={!hasUserAnAccount}>
               Log In
             </button>
@@ -113,8 +114,8 @@ function Signin() {
     }
 
     const stringifiedAccount = JSON.stringify(data)
-    localStorage.setItem('accout', stringifiedAccount)
-    context.SetAccount(data)
+    localStorage.setItem('account', stringifiedAccount)
+    context.setAccount(data)
 
     handleSignIn()
   }

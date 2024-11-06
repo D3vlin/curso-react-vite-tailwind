@@ -100,7 +100,7 @@ const ShoppingCartProvider = ({ children }) => {
     };
 
     //SignOut and Account
-    const [accout, setAccout] = useState({})
+    const [account, setAccount] = useState({})
     const [signOut, setSignOut] = useState(false)
 
     return (
@@ -125,8 +125,8 @@ const ShoppingCartProvider = ({ children }) => {
                 searchByCategory,
                 setSearchByCategory,
                 filteredItems,
-                accout,
-                setAccout,
+                account,
+                setAccount,
                 signOut,
                 setSignOut
             }

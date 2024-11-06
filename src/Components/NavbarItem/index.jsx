@@ -10,6 +10,12 @@ const NavBarItem = ({ to, className, children, onClick, isRestricted }) => {
     const parsedSignOut = JSON.parse(localStorage.getItem('sign-out'))
     const isUserSignOut = context.signOut || parsedSignOut
 
+    //Account
+    const parsedAccount = JSON.parse(localStorage.getItem('account'))
+    const noAccountInLocalStorage = parsedAccount ? Object.keys(parsedAccount).length === 0 : true
+    const noAccountInLocalState = context.account ? Object.keys(context.account).length === 0 : true
+    const hasUserAnAccount = !noAccountInLocalStorage || !noAccountInLocalState
+
     const handleSignOut = () => {
         const stringifiedSignOut = JSON.stringify(true)
         localStorage.setItem('sign-out', stringifiedSignOut)
@@ -29,20 +35,18 @@ const NavBarItem = ({ to, className, children, onClick, isRestricted }) => {
 
     const renderNavLinks = () => {
         if (!isRestricted) {
-            if (to != '/sign-in') {
-                return renderNavLink()
-
-            } else {
+            if (to === '/sign-in') {
                 return (
                     <li className={className}>
                         <NavLink to={to} onClick={() => handleSignOut()} className={({ isActive }) => isActive ? activeStyle : undefined}>
-                            {children}
+                            {(isUserSignOut) ? 'Sign In' : children}
                         </NavLink>
                     </li>
                 )
+            } else {
+                return renderNavLink()
             }
-        } else if (!isUserSignOut && isRestricted) {
-            console.log('isUserSignOut', isUserSignOut)
+        } else if (hasUserAnAccount && !isUserSignOut && isRestricted) {
             return renderNavLink()
         }
     }
